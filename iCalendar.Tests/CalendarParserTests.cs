@@ -38,6 +38,31 @@ namespace iCalendar.Tests
             CalendarParser parser = new CalendarParser(iCalendarObject);
         }
 
+        [Test]
+        public void Given_CalendatObject_When_CalendarNameIsPresent_Then_NameIsParsed()
+        {
+            string expected = "Name";
+            string iCalendarObject = @"BEGIN:VCALENDAR
+                                       X-WR-CALNAME:Name
+                                       END:VCALENDAR";
 
+            CalendarParser parser = new CalendarParser(iCalendarObject);
+            Calendar calendar = parser.Parse();
+
+            StringAssert.AreEqualIgnoringCase(expected, calendar.Name);
+        }
+
+        [Test]
+        public void Given_CalendatObject_When_CalendarNameIsMissing_Then_NameIsEmpty()
+        {
+            string expected = string.Empty;
+            string iCalendarObject = @"BEGIN:VCALENDAR
+                                       END:VCALENDAR";
+
+            CalendarParser parser = new CalendarParser(iCalendarObject);
+            Calendar calendar = parser.Parse();
+
+            StringAssert.AreEqualIgnoringCase(expected, calendar.Name);
+        }
     }
 }
