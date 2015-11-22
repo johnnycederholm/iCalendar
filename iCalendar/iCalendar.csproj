@@ -41,8 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calendar.cs" />
+    <Compile Include="CalendarEvent.cs" />
     <Compile Include="CalendarParser.cs" />
     <Compile Include="Exceptions\MalformedFormatException.cs" />
+    <Compile Include="iCalendarVersion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
