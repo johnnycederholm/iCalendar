@@ -1,7 +1,7 @@
-﻿using iCalendar.Exceptions;
-using NUnit.Framework;
-using System;
+﻿using System;
 using System.Linq;
+using NUnit.Framework;
+using iCalendar.Exceptions;
 
 namespace iCalendar.Tests
 {
@@ -121,21 +121,40 @@ namespace iCalendar.Tests
         {
             int expected = 2;
             string iCalendarObject = @"BEGIN:VCALENDAR
+                                       PRODID:-//Google Inc//Google Calendar 70.9054//EN
                                        VERSION:2.0
-                                       PRODID:-//hacksw/handcal//NONSGML v1.0//EN
+                                       CALSCALE:GREGORIAN
+                                       METHOD:PUBLISH
+                                       X-WR-CALNAME:Brytarstryrning
+                                       X-WR-TIMEZONE:Europe/Stockholm
+                                       X-WR-CALDESC:Kalender för att testa brytarstyrning.
                                        BEGIN:VEVENT
-                                       UID:uid1@example.com
-                                       DTSTAMP:19970714T170000Z
-                                       DTSTART:19970714T170000Z
-                                       DTEND:19970715T035959Z
-                                       SUMMARY:Bastille Day Party
+                                       DTSTART:20151130T050000Z
+                                       DTEND:20151130T060000Z
+                                       DTSTAMP:20151122T192540Z
+                                       UID:d4i64hi2ln8gerr66v4lumetd0@google.com
+                                       CREATED:20151122T192506Z
+                                       DESCRIPTION:
+                                       LAST-MODIFIED:20151122T192506Z
+                                       LOCATION:
+                                       SEQUENCE:0
+                                       STATUS:CONFIRMED
+                                       SUMMARY:Test 2
+                                       TRANSP:OPAQUE
                                        END:VEVENT
                                        BEGIN:VEVENT
-                                       UID:uid1@example.com
-                                       DTSTAMP:19970714T170000Z
-                                       DTSTART:19970714T170000Z
-                                       DTEND:19970715T035959Z
-                                       SUMMARY:Bastille Day Party
+                                       DTSTART:20151129T050000Z
+                                       DTEND:20151129T060000Z
+                                       DTSTAMP:20151122T192540Z
+                                       UID:kqd3chl4rvstg7g8g4k3uh22t0@google.com
+                                       CREATED:20151111T192501Z
+                                       DESCRIPTION:
+                                       LAST-MODIFIED:20151122T192450Z
+                                       LOCATION:
+                                       SEQUENCE:1
+                                       STATUS:CONFIRMED
+                                       SUMMARY:Test
+                                       TRANSP:OPAQUE
                                        END:VEVENT
                                        END:VCALENDAR";
 
