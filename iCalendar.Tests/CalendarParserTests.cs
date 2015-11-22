@@ -186,5 +186,38 @@ namespace iCalendar.Tests
             Assert.AreEqual(expectedNumberOfEvents, calendar.NumberOfEvents);
             Assert.AreEqual(expectedEvent, calendar.Events.First());
         }
+
+        [Test]
+        public void Given_CalendarObject_When_EventIsOccurringRightNow_Then_OngoingIsTrue()
+        {
+            string iCalendarObject = $@"BEGIN:VCALENDAR
+                                       PRODID:-//Google Inc//Google Calendar 70.9054//EN
+                                       VERSION:2.0
+                                       CALSCALE:GREGORIAN
+                                       METHOD:PUBLISH
+                                       X-WR-CALNAME:Brytarstryrning
+                                       X-WR-TIMEZONE:Europe/Stockholm
+                                       X-WR-CALDESC:Kalender för att testa brytarstyrning.
+                                       BEGIN:VEVENT
+                                       DTSTART:{DateTime.Now.AddHours(-1).ToString("yyyyMMddTHHmmssZ")}
+                                       DTEND:{DateTime.Now.AddHours(2).ToString("yyyyMMddTHHmmssZ")}
+                                       DTSTAMP:20151122T154644Z
+                                       UID:kqd3chl4rvstg7g8g4k3uh22t0@google.com
+                                       CREATED:20151111T192501Z
+                                       DESCRIPTION:
+                                       LAST-MODIFIED:20151111T192501Z
+                                       LOCATION:
+                                       SEQUENCE:0
+                                       STATUS:CONFIRMED
+                                       SUMMARY:Test
+                                       TRANSP:OPAQUE
+                                       END:VEVENT
+                                       END:VCALENDAR";
+
+            CalendarParser parser = new CalendarParser(iCalendarObject);
+            Calendar calendar = parser.Parse();
+
+            Assert.IsTrue(calendar.Events.First().Ongoing);
+        }
     }
 }
