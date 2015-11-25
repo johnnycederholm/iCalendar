@@ -238,5 +238,39 @@ namespace iCalendar.Tests
 
             Assert.IsTrue(calendar.Events.First().Ongoing);
         }
+
+        [Test]
+        public void Given_CalendarObject_When_EventContainDescriptionWithNumerics_Then_DescriptionIsExtractedProperly()
+        {
+            string iCalendarObject = $@"BEGIN:VCALENDAR
+                                       PRODID:-//Google Inc//Google Calendar 70.9054//EN
+                                       VERSION:2.0
+                                       CALSCALE:GREGORIAN
+                                       METHOD:PUBLISH
+                                       X-WR-CALNAME:Brytarstryrning
+                                       X-WR-TIMEZONE:Europe/Stockholm
+                                       X-WR-CALDESC:Kalender för att testa brytarstyrning.
+                                       BEGIN:VEVENT
+                                       DTSTART:20151201T060000Z
+                                       DTEND:20151201T070000Z
+                                       DTSTAMP:20151122T154644Z
+                                       UID:kqd3chl4rvstg7g8g4k3uh22t0@google.com
+                                       CREATED:20151111T192501Z
+                                       DESCRIPTION:ABC123
+                                       LAST-MODIFIED:20151111T192501Z
+                                       LOCATION:
+                                       SEQUENCE:0
+                                       STATUS:CONFIRMED
+                                       SUMMARY:Test
+                                       TRANSP:OPAQUE
+                                       END:VEVENT
+                                       END:VCALENDAR";
+
+            string expected = "ABC123";
+            CalendarParser parser = new CalendarParser(iCalendarObject);
+            Calendar calendar = parser.Parse();
+
+            StringAssert.AreEqualIgnoringCase(expected, calendar.Events.First().Description);
+        }
     }
 }

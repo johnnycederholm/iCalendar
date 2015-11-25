@@ -16,7 +16,7 @@ namespace iCalendar
             if (string.IsNullOrWhiteSpace(calendarObject))
                 throw new MalformedFormatException();
 
-            CalendarObject = calendarObject;
+            CalendarObject = calendarObject.Trim();
         }
 
         public Calendar Parse()
@@ -115,7 +115,7 @@ namespace iCalendar
         private CalendarEvent ParseEvent(string eventData)
         {
             string summary = Regex.Match(eventData, "(?<=SUMMARY:)[A-Öa-ö ]*").Value;
-            string description = Regex.Match(eventData, "(?<=DESCRIPTION:)[A-Öa-ö ]*").Value;
+            string description = Regex.Match(eventData, "(?<=DESCRIPTION:)[0-9A-Öa-ö ]*").Value;
             string start = Regex.Match(eventData, "(?<=DTSTART:)[0-9TZ]*").Value;
             string end = Regex.Match(eventData, "(?<=DTEND:)[0-9TZ]*").Value;
             CalendarEvent calendarEvent = new CalendarEvent();
